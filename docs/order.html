@@ -1,1 +1,20 @@
-<html><body><h2>Order</h2></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Place Order - S.V Traders</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h2>Place Order</h2>
+  <form id="order-form">
+    <input name="shop_name" placeholder="Shop Name" required />
+    <input name="shop_mobile" placeholder="Mobile Number" required />
+    <textarea name="items" placeholder='[{"id":"aloo-sev","qty":10}]' required></textarea>
+    <button type="submit">Submit Order</button>
+  </form>
+  <div id="status"></div>
+
+  <script src="js/order.js"></script>
+</body>
+</html>
