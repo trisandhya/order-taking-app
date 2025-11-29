@@ -1,1 +1,30 @@
-<html><body><h2>Products</h2></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products - S.V Traders</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h2>Product Catalog</h2>
+  <div id="product-list"></div>
+
+  <script>
+    fetch("https://raw.githubusercontent.com/trisandhya/s-v-traders/data-sync/data/balaji-products.json")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("product-list");
+        data.products.forEach(p => {
+          container.innerHTML += `
+            <div class="product">
+              <img src="${p.images?.[0]?.src || 'images/default.png'}" width="120" />
+              <h3>${p.title}</h3>
+              <p>₹${p.variants?.[0]?.price || '-'}</p>
+            </div>
+          `;
+        });
+      })
+      .catch(err => console.error(err));
+  </script>
+</body>
+</html>
