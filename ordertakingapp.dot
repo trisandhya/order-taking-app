@@ -1,0 +1,17 @@
+digraph OrderTakingApp {
+    rankdir=LR;
+    node [shape=box, style=filled, color=lightblue, fontname="Arial"];
+
+    Salesman [label="Salesman\n(places order on mobile)"];
+    Frontend [label="Frontend App\n(GitHub Pages)"];
+    Backend [label="Backend Web App\n(Google Apps Script)"];
+    Sheet [label="Google Sheet\n(Order Log)"];
+    Distributor [label="Distributor\n(reviews orders)"];
+    Shopkeeper [label="Shopkeeper\n(receives products)"];
+
+    Salesman -> Frontend [label="Select products\n+ quantities"];
+    Frontend -> Backend [label="Submit order\n(JSON payload)"];
+    Backend -> Sheet [label="Append row\n(Timestamp, User, SKU,\nEN + Local Name, Qty, Price, Total)"];
+    Sheet -> Distributor [label="Daily review\nPrepare deliveries"];
+    Distributor -> Shopkeeper [label="Deliver products\nbased on sheet"];
+}
