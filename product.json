@@ -1,0 +1,35 @@
+[
+  {
+    "sku": "ALOOSEV-200",
+    "image": "images/aloo_sev_200.jpg",
+    "name": {
+      "en": "Aloo Sev - 200g",
+      "hi": "आलू सेव - 200ग्राम",
+      "te": "ఆలూ సేవ్ - 200గ్రా"
+    },
+    "price": 40,
+    "category": "Namkeen"
+  },
+  {
+    "sku": "KHICHIYA-RICE",
+    "image": "images/khichiya_rice_200.jpg",
+    "name": {
+      "en": "Khichiya Papad - 200g",
+      "hi": "खिचिया पापड़ - 200ग्राम",
+      "te": "ఖిచియా పాపడ్ - 200గ్రా"
+    },
+    "price": 50,
+    "category": "Papad"
+  },
+  {
+    "sku": "MIXNAMKEEN-500",
+    "image": "images/mix_namkeen_500.jpg",
+    "name": {
+      "en": "Mix Namkeen - 500g",
+      "hi": "मिक्स नमकीन - 500ग्राम",
+      "te": "మిక్స్ నమ్కీన్ - 500గ్రా"
+    },
+    "price": 100,
+    "category": "Namkeen"
+  }
+]
