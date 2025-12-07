@@ -3,13 +3,16 @@ digraph OrderTakingApp {
   node [shape=rectangle, style=filled, fillcolor=lightgray, fontsize=12];
 
   // Components
-  GitHubPages [label="🌐 GitHub Pages\n(Static Frontend)"];
   User [label="👤 Salesman/User\n(Login, Order, Logout)"];
+  GitHubPages [label="🌐 GitHub Pages\n(Static Frontend)"];
+  ProductsJSON [label="📂 products.json\n(English + Local Language)"];
   AppsScript [label="⚙️ Google Apps Script\n(Web App Backend)"];
   GoogleSheet [label="📊 Google Sheet\n(Order Log)"];
 
   // Flow
-  User -> GitHubPages [label="Access website\n(local language UI)"];
+  User -> GitHubPages [label="Access website\n(select language, view catalog)"];
+  ProductsJSON -> GitHubPages [label="Load product data\n(images + bilingual names)"];
+
   GitHubPages -> AppsScript [label="Login request"];
   AppsScript -> GoogleSheet [label="Record login\n(timestamp, user)"];
 
