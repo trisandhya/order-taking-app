@@ -1,0 +1,24 @@
+digraph OrderTakingApp {
+  rankdir=LR;
+  node [shape=rectangle, style=filled, fillcolor=lightgray, fontsize=12];
+
+  // Components
+  GitHubPages [label="🌐 GitHub Pages\n(Static Frontend)"];
+  User [label="👤 Salesman/User\n(Login, Order, Logout)"];
+  AppsScript [label="⚙️ Google Apps Script\n(Web App Backend)"];
+  GoogleSheet [label="📊 Google Sheet\n(Order Log)"];
+
+  // Flow
+  User -> GitHubPages [label="Access website\n(local language UI)"];
+  GitHubPages -> AppsScript [label="Login request"];
+  AppsScript -> GoogleSheet [label="Record login\n(timestamp, user)"];
+
+  GitHubPages -> AppsScript [label="Submit order\n(product ↔ qty)"];
+  AppsScript -> GoogleSheet [label="Append ~100 cells\nper order"];
+
+  GitHubPages -> AppsScript [label="Logout request"];
+  AppsScript -> GoogleSheet [label="Record logout\n(timestamp)"];
+
+  // Return paths
+  AppsScript -> GitHubPages [label="Response\n(success/failure)"];
+}
