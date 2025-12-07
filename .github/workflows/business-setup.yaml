@@ -1,0 +1,58 @@
+name: Business Setup
+
+on:
+  workflow_dispatch:   # manual trigger
+  push:
+    paths:
+      - "business.json"   # config file with business details
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests google-api-python-client google-auth-httplib2 google-auth-oauthlib
+
+      - name: Read business config
+        run: |
+          BUSINESS_NAME=$(jq -r '.name' business.json)
+          echo "BUSINESS_NAME=$BUSINESS_NAME" >> $GITHUB_ENV
+
+      - name: Download product images
+        run: |
+          python scripts/download_images.py products.json images products_local.json
+
+      - name: Create Google Sheet
+        run: |
+          python scripts/create_sheet.py "$BUSINESS_NAME"
+
+      - name: Deploy Apps Script
+        run: |
+          python scripts/deploy_apps_script.py "$BUSINESS_NAME"
+
+      - name: Customize frontend
+        run: |
+          sed -i "s/{{BUSINESS_NAME}}/$BUSINESS_NAME/g" index.html
+          # inject Web App URL into script.js
+
+      - name: Commit updated files
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add images/ products_local.json index.html script.js
+          git commit -m "Setup new business instance: $BUSINESS_NAME"
+          git push
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
